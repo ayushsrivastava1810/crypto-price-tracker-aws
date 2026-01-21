@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+requests
+Flask-JWT-Extended
+Werkzeug
+
