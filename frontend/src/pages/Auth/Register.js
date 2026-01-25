@@ -1,52 +1,62 @@
 import React, { useState } from "react";
-import { Container, Card, TextField, Button, Typography } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import API from "../../api";
+import "./auth.css";
 
-export default function Register() {
+function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
-      await API.post("/auth/register", {
-        email,
-        password,
-      });
+      await API.post("/auth/register", { email, password });
       alert("Registration successful");
       navigate("/login");
-    } catch (err) {
-      alert(err.response?.data?.error || "Register failed");
+    } catch {
+      alert("Registration failed");
     }
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 10 }}>
-      <Card sx={{ p: 4 }}>
-        <Typography variant="h5" gutterBottom>
-          Register
-        </Typography>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2 className="auth-title">Create Account 🚀</h2>
 
         <TextField
           fullWidth
           label="Email"
           margin="normal"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <TextField
           fullWidth
-          type="password"
           label="Password"
+          type="password"
           margin="normal"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button fullWidth variant="contained" sx={{ mt: 2 }} onClick={handleRegister}>
+        <Button
+          fullWidth
+          variant="contained"
+          size="large"
+          className="auth-btn"
+          onClick={handleRegister}
+        >
           Register
         </Button>
-      </Card>
-    </Container>
+
+        <div className="auth-footer">
+          Already registered? <a href="/login">Login</a>
+        </div>
+      </div>
+    </div>
   );
 }
+
+export default Register;

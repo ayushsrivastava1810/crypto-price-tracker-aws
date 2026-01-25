@@ -5,6 +5,9 @@ from flask_jwt_extended import JWTManager
 from routes.crypto import crypto_bp
 from routes.watchlist import watchlist_bp
 from routes.auth import auth_bp
+from routes.admin import admin_bp
+
+
 
 
 
@@ -22,6 +25,9 @@ def home():
 app.register_blueprint(crypto_bp, url_prefix="/crypto")
 app.register_blueprint(watchlist_bp, url_prefix="/watchlist")
 app.register_blueprint(auth_bp, url_prefix="/auth")
+app.register_blueprint(admin_bp, url_prefix="/admin")
+
+
 
 
 if __name__ == "__main__":

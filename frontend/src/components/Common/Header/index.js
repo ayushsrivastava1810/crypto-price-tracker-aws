@@ -54,9 +54,9 @@ function Header() {
         <a href="/">
           <p className="link">Home</p>
         </a>
-	  <button className="link" onClick={logout}>
+	 <p className="link logout-link" onClick={logout}>
   Logout
-</button>
+</p>
 
         <a href="/compare">
           <p className="link">Compare</p>

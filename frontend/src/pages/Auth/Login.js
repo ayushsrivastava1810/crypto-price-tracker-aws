@@ -1,59 +1,65 @@
 import React, { useState } from "react";
-import { Container, Card, TextField, Button, Typography } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import API from "../../api";
+import "./auth.css";
 
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const res = await API.post("/auth/login", {
-        email,
-        password,
-      });
-
+      const res = await API.post("/auth/login", { email, password });
       localStorage.setItem("token", res.data.access_token);
       localStorage.setItem("role", res.data.role);
 
-      if (res.data.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/dashboard");
-      }
-    } catch (err) {
+      if (res.data.role === "admin") navigate("/admin");
+      else navigate("/dashboard");
+    } catch {
       alert("Invalid credentials");
     }
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 10 }}>
-      <Card sx={{ p: 4 }}>
-        <Typography variant="h5" gutterBottom>
-          Login
-        </Typography>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2 className="auth-title">Welcome Back 👋</h2>
 
         <TextField
           fullWidth
           label="Email"
           margin="normal"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <TextField
           fullWidth
-          type="password"
           label="Password"
+          type="password"
           margin="normal"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button fullWidth variant="contained" sx={{ mt: 2 }} onClick={handleLogin}>
+        <Button
+          fullWidth
+          variant="contained"
+          size="large"
+          className="auth-btn"
+          onClick={handleLogin}
+        >
           Login
         </Button>
-      </Card>
-    </Container>
+
+        <div className="auth-footer">
+          New user? <a href="/register">Create account</a>
+        </div>
+      </div>
+    </div>
   );
 }
+
+export default Login;
