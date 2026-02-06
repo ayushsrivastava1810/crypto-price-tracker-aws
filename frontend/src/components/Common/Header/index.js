@@ -6,9 +6,13 @@ import Switch from "@mui/material/Switch";
 import { toast } from "react-toastify";
 
 function Header() {
+
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") == "dark" ? true : false
+    localStorage.getItem("theme") == "dark"
   );
+
+  // ✅ CHECK LOGIN STATUS
+  const isLoggedIn = localStorage.getItem("token");
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -49,25 +53,49 @@ function Header() {
       <h1>
         CryptoTracker<span style={{ color: "var(--blue)" }}>.</span>
       </h1>
+
       <div className="links">
-        <Switch checked={darkMode} onClick={() => changeMode()} />
+
+        <Switch checked={darkMode} onClick={changeMode} />
+
         <a href="/">
           <p className="link">Home</p>
         </a>
-	 <p className="link logout-link" onClick={logout}>
-  Logout
-</p>
 
-        <a href="/compare">
-          <p className="link">Compare</p>
-        </a>
-        <a href="/watchlist">
-          <p className="link">Watchlist</p>
-        </a>
-        <a href="/dashboard">
-          <Button text={"dashboard"} />
-        </a>
+        {/* ✅ IF USER LOGGED IN */}
+        {isLoggedIn ? (
+          <>
+            <a href="/compare">
+              <p className="link">Compare</p>
+            </a>
+
+            <a href="/watchlist">
+              <p className="link">Watchlist</p>
+            </a>
+
+            <a href="/dashboard">
+              <Button text={"Dashboard"} />
+            </a>
+
+            <p className="link" onClick={logout}>
+              Logout
+            </p>
+          </>
+        ) : (
+          <>
+            {/* ✅ IF USER NOT LOGGED IN */}
+            <a href="/login">
+              <p className="link">Login</p>
+            </a>
+
+            <a href="/register">
+              <Button text={"Signup"} />
+            </a>
+          </>
+        )}
+
       </div>
+
       <div className="drawer-component">
         <TemporaryDrawer />
       </div>

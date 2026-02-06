@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../../api";
 import "./auth.css";
 
@@ -54,9 +54,11 @@ function Login() {
           Login
         </Button>
 
+        {/* ✅ Redirect to Register */}
         <div className="auth-footer">
-          New user? <a href="/register">Create account</a>
+          New user? <Link to="/register">Create account</Link>
         </div>
+
       </div>
     </div>
   );
