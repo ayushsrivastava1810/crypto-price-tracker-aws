@@ -9,7 +9,7 @@ A full-stack cryptocurrency tracking web application with authentication, person
 Frontend: React  
 Backend: Flask  
 Database: SQLite + AWS DynamoDB  
-Cloud Services: AWS EC2, SNS, IAM
+Cloud Services: AWS EC2, SNS
 Authentication: JWT  
 Process Manager: PM2  
 
