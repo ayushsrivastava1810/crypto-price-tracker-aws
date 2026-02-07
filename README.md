@@ -40,6 +40,7 @@ aws_app.py → AWS Integrated Backend
 ## ⚙️ Local Setup
 
 ### Backend
+
 cd backend
 
 pip install -r requirements.txt
@@ -48,6 +49,7 @@ python app.py
 
 
 ### Frontend
+
 cd frontend
 
 npm install
@@ -60,16 +62,19 @@ npm start
 ## ☁️ AWS Deployment
 
 ### Backend
+
 python aws_app.py
 
 
 ### Frontend
+
 npm run build
 
 serve -s build -l 3000
 
 
 ### Run Using PM2
+
 pm2 start aws_app.py --name backend --interpreter python3
 
 pm2 start "serve -s build -l 3000" --name frontend
