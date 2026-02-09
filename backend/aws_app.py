@@ -11,6 +11,8 @@ from routes.crypto import crypto_bp
 from routes.watchlist import watchlist_bp
 from routes.auth import auth_bp
 from routes.admin import admin_bp
+from init_db import init_db
+
 
 # =========================
 # AWS CONFIGURATION
@@ -50,6 +52,7 @@ app.config["JWT_SECRET_KEY"] = os.getenv(
 )
 
 jwt = JWTManager(app)
+init_db()
 
 SERVER_START_TIME = time.time()
 

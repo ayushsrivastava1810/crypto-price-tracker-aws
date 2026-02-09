@@ -6,6 +6,7 @@ from routes.crypto import crypto_bp
 from routes.watchlist import watchlist_bp
 from routes.auth import auth_bp
 from routes.admin import admin_bp
+from init_db import init_db
 
 
 
@@ -13,6 +14,7 @@ from routes.admin import admin_bp
 
 app = Flask(__name__)
 CORS(app)
+init_db()
 
 app.config["JWT_SECRET_KEY"] = "super-secret-key"
 jwt = JWTManager(app)
